@@ -309,6 +309,7 @@ img, video {
   color: #808090;
   margin-bottom: 3.5rem;
   font-weight: 300;
+  font-size: 0.875rem;
 }
 
 /* ===== 3D SKILL SPHERE (30% smaller, JS-controlled rotation) ===== */
@@ -704,7 +705,7 @@ img, video {
 /* Mobile (max-width: 480px) */
 @media (max-width: 480px) {
   .section-title { font-size: 1.75rem; }
-  .section-subtitle { font-size: 0.85rem; margin-bottom: 2rem; }
+  .section-subtitle { font-size: 0.8rem; margin-bottom: 2rem; }
   #home h1 { font-size: 1.75rem !important; }
   #home .text-base { font-size: 0.82rem !important; }
   #heroVideo { object-fit: cover; object-position: center top; }

@@ -346,17 +346,18 @@
 
   document.addEventListener('touchmove', function(e) {
     if (!isDragging) return;
+    e.preventDefault();
     var t = e.touches[0];
     var dx = t.clientX - prevX;
     var dy = t.clientY - prevY;
-    rotY += dx * 0.4;
-    rotX += dy * 0.3;
+    rotY += dx * 0.8;
+    rotX += dy * 0.6;
     if (rotX > 30) rotX = 30;
     if (rotX < -30) rotX = -30;
     prevX = t.clientX;
     prevY = t.clientY;
     applyRotation();
-  }, { passive: true });
+  }, { passive: false });
 
   document.addEventListener('touchend', function() {
     if (isDragging) {
