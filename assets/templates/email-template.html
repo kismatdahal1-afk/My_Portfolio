@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body {
+      margin: 0; padding: 0;
+      background: #0b0b1a;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .wrapper {
+      max-width: 600px;
+      margin: 40px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 212, 255, 0.15);
+      border: 1px solid rgba(0, 212, 255, 0.1);
+    }
+    .header {
+      background: linear-gradient(135deg, #0b0b1a, #1a1a3e);
+      color: #00d4ff;
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid #00d4ff;
+    }
+    .logo-container {
+      margin-right: 20px;
+    }
+    .logo-image {
+      /* Header padding 30px + 30px = 60px base. 
+         Setting 54px (which is 10% smaller than 60px) */
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+      border: 2px solid #00d4ff;
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+    }
+    .header-text h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0.05em;
+      text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+    }
+    .header-text p {
+      margin: 4px 0 0;
+      color: #c0c0d0;
+      font-size: 13px;
+    }
+    .body { background: #111126; padding: 35px; }
+    table { width: 100%; border-collapse: collapse; }
+    td.label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #94a3b8;
+      padding: 15px 0 5px;
+    }
+    td.value {
+      font-size: 15px;
+      color: #ffffff;
+      padding: 5px 0 15px;
+      border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+    }
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 30px;
+    }
+    .badge {
+      background: #00d4ff;
+      color: #0b0b1a;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">
+      <div class="logo-container">
+        <img src="https://kismat.vercel.app/assets/images/i.jpeg" alt="Logo" class="logo-image" />
+      </div>
+      <div class="header-text">
+        <h1>✦ New Portfolio Message</h1>
+        <p>Someone reached out from your website</p>
+      </div>
+    </div>
+    <div class="body">
+      <table>
+        <tr><td class="label">Name</td></tr>
+        <tr><td class="value">{{name}}</td></tr>
+        <tr><td class="label">Contact</td></tr>
+        <tr><td class="value">{{contact}}</td></tr>
+        <tr><td class="label">Email</td></tr>
+        <tr><td class="value">{{email}}</td></tr>
+        <tr><td class="label">Message</td></tr>
+        <tr><td class="value" style="white-space:pre-wrap;">{{message}}</td></tr>
+      </table>
+      <div class="footer">
+        <span class="badge">Portfolio Contact</span>
+        <p style="margin-top:15px;">Sent from your portfolio website — Kismat Dahal</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

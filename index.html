@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kismat Dahal | Portfolio</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.cdnfonts.com/css/ariana" rel="stylesheet" />
+
+  <!-- Devicon (skill logos) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+  <!-- Font Awesome 6 (UI icons for cards) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Background Audio -->
+  <audio id="bgAudio" src="assets/videos/vid.mp4" loop preload="auto"></audio>
+
+
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300" style="background:transparent;">
+    <div class="w-full px-8 md:px-16 lg:px-24 py-3 grid grid-cols-3 items-center">
+      <a href="#home" class="neon-text" style="font-size:1.5625rem; font-weight:700; letter-spacing:0.05em; justify-self:start;">KD<span style="color:#e0e0e0;">.</span></a>
+      <ul class="hidden md:flex items-center justify-center gap-8">
+        <li><a href="#home" class="nav-link text-sm">Home</a></li>
+        <li><a href="#about" class="nav-link text-sm">About</a></li>
+        <li><a href="#skills" class="nav-link text-sm">Skills</a></li>
+        <li><a href="#services" class="nav-link text-sm">Services</a></li>
+        <li><a href="#projects" class="nav-link text-sm">Projects</a></li>
+        <li><a href="#certificates" class="nav-link text-sm">Certificates</a></li>
+        <li><a href="#contact" class="nav-link text-sm">Contact</a></li>
+      </ul>
+      <div class="flex items-center gap-3 justify-self-end">
+        <button id="themeToggle" class="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300"
+                style="background:rgba(255,255,255,0.06); border:1px solid rgba(0,212,255,0.2);"
+                aria-label="Toggle theme">
+          <svg id="sunIcon" class="w-4 h-4 hidden" fill="none" stroke="#00d4ff" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg id="moonIcon" class="w-4 h-4" fill="none" stroke="#00d4ff" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+        <button id="menuToggle" class="md:hidden text-white focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden flex-col items-center gap-4 pb-4" style="background:rgba(11,11,26,0.95);">
+      <a href="#home" class="nav-link text-sm">Home</a>
+      <a href="#about" class="nav-link text-sm">About</a>
+      <a href="#skills" class="nav-link text-sm">Skills</a>
+      <a href="#services" class="nav-link text-sm">Services</a>
+      <a href="#projects" class="nav-link text-sm">Projects</a>
+      <a href="#certificates" class="nav-link text-sm">Certificates</a>
+      <a href="#contact" class="nav-link text-sm">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO ==================== -->
+  <section id="home" class="relative w-full h-screen flex items-center overflow-hidden">
+    <video id="heroVideo" class="absolute top-0 left-0 w-full h-full object-cover"
+           src="assets/videos/vid.mp4" muted loop playsinline preload="auto"></video>
+    <div class="absolute inset-0 hero-overlay"></div>
+
+    <!-- Sound Toggle FAB (fixed bottom-right) -->
+    <button id="soundToggle" class="sound-toggle-btn" aria-label="Toggle sound">
+      <svg id="soundIconOff" class="sound-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+      </svg>
+      <svg id="soundIconOn" class="sound-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.95 6.05a8 8 0 010 11.9" />
+      </svg>
+    </button>
+
+    <div class="relative z-10 w-full px-8 md:px-16 lg:px-24 text-left" style="font-family:'Plus Jakarta Sans',sans-serif;">
+      <p class="text-xs md:text-sm uppercase tracking-[0.2em] mb-5"
+         style="color:#00D1FF; font-weight:600;">
+        Welcome to my world
+      </p>
+      <h1 class="text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.1] mb-5"
+          style="font-weight:800; color:#FFFFFF;" data-aos="fade-up" data-aos-duration="1000">
+        Building <span class="neon-text">Digital</span><br />
+        <span style="color:#FFFFFF;">Experiences</span><br />
+        <span style="color:#FFFFFF;">That </span><span class="neon-text">Matter.</span>
+      </h1>
+      <p class="text-base md:text-lg text-[#9CA3AF] max-w-md leading-relaxed mb-9"
+         style="line-height:1.6;" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+        I bridge the gap between creative UI/UX design and functional, scalable code. Based in Kathmandu, crafting unique solutions for the web.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#projects"
+           class="px-8 py-3 rounded-full font-semibold text-sm tracking-wider uppercase transition-all duration-300"
+           style="background:#00D1FF; color:#111827; border:2px solid #00D1FF;" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400"
+           onmouseover="this.style.boxShadow='0 0 20px rgba(0,209,255,0.5)';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.boxShadow='none';this.style.transform='none'">
+          View My Work
+        </a>
+        <a href="#contact"
+           class="px-8 py-3 rounded-full font-semibold text-sm tracking-wider uppercase transition-all duration-300"
+           style="background:transparent; border:2px solid #00D1FF; color:#00D1FF;" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500"
+           onmouseover="this.style.background='rgba(0,209,255,0.1)';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.background='transparent';this.style.transform='none'">
+          Get In Touch
+        </a>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+      <span class="text-xs text-gray-500 tracking-widest uppercase">Scroll</span>
+      <div class="w-5 h-8 rounded-full border border-gray-600 flex justify-center pt-2">
+        <div class="w-1 h-2 rounded-full bg-gray-400 animate-bounce"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== STATS COUNTER ==================== -->
+  <section class="py-12 px-5 border-y border-gray-800" style="background:#0e0e20;">
+    <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="text-center p-4">
+        <div class="stat-number neon-text" data-count="2" data-aos="fade-up" data-aos-duration="600">0</div>
+        <p class="text-sm text-gray-500 uppercase tracking-wider">Projects Built</p>
+      </div>
+      <div class="text-center p-4">
+        <div class="stat-number neon-text" data-count="25" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">0</div>
+        <p class="text-sm text-gray-500 uppercase tracking-wider">Technologies</p>
+      </div>
+      <div class="text-center p-4">
+        <div class="stat-number neon-text" data-count="15000" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">0</div>
+        <p class="text-sm text-gray-500 uppercase tracking-wider">Data Points Analyzed</p>
+      </div>
+      <div class="text-center p-4">
+        <div class="stat-number neon-text" data-count="2" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">0</div>
+        <p class="text-sm text-gray-500 uppercase tracking-wider">Certifications</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT ==================== -->
+  <section id="about" class="py-24 px-5" style="background:#0e0e20;">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="section-title">About <span>Me</span></h2>
+      <p class="section-subtitle">The person behind the code</p>
+
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <div class="flex flex-col items-center">
+          <div class="w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden mb-6"
+               style="border:3px solid rgba(0,212,255,0.25); box-shadow:0 0 5px rgba(0,212,255,0.3),0 0 15px rgba(0,212,255,0.1);" data-aos="zoom-in" data-aos-duration="800">
+            <img src="assets/images/i.jpeg" alt="Kismat Dahal" class="w-full h-full object-cover" />
+          </div>
+          <p class="text-gray-400 text-sm">Kathmandu, Nepal</p>
+          <p class="text-gray-400 text-sm">kismatdahal1@gmail.com</p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-semibold mb-4" data-aos="fade-right" data-aos-duration="800">
+            From <span class="neon-text">Science</span> to
+            <span class="neon-text">Software</span>
+          </h3>
+          <p class="text-gray-400 leading-relaxed mb-4" data-aos="fade-right" data-aos-duration="800" data-aos-delay="100">
+            I completed my SEE at Shree Makpa Secondary School (3.60 GPA) before pursuing
+            Plus Two in Science (Physical Group with Computer Science) at Reliance
+            International Academy. Now I'm pursuing a BSc CSIT in Kathmandu — bridging
+            analytical thinking with modern development.
+          </p>
+          <p class="text-gray-400 leading-relaxed mb-4" data-aos="fade-right" data-aos-duration="800" data-aos-delay="200">
+            As a self-taught web developer, I've built my stack from the ground up —
+            HTML, CSS, JavaScript, and Python — and applied them to real-world projects
+            including e-commerce platforms (Gaunle-Mart, Rasilo-Suntala), banking and
+            school management systems, a note management app, and a BMW sales analysis
+            processing over 15,000+ data points.
+          </p>
+          <p class="text-gray-400 leading-relaxed mb-6" data-aos="fade-right" data-aos-duration="800" data-aos-delay="300">
+            I'm passionate about UI/UX design, full-stack development, and data analysis.
+            Every project is an opportunity to craft something that works beautifully
+            and performs flawlessly.
+          </p>
+          <a href="assets/docs/cv.pdf" target="_blank" class="cv-btn" data-aos="zoom-in" data-aos-duration="600">
+            <i class="fa-solid fa-download" style="margin-right:8px;"></i>Download Resume
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zigzag Timeline -->
+    <div class="timeline-container mt-16" data-aos="fade-up" data-aos-duration="800">
+      <div class="timeline-item" data-aos="fade-right" data-aos-duration="600">
+        <span class="timeline-date">2026</span>
+        <p class="timeline-title">BSc CSIT (Pursuing)</p>
+        <p class="timeline-desc">Building a strong CS foundation at Kathmandu.</p>
+      </div>
+      <div class="timeline-item" data-aos="fade-left" data-aos-duration="600" data-aos-delay="100">
+        <span class="timeline-date">2026</span>
+        <p class="timeline-title">Self-Taught Web Development</p>
+        <p class="timeline-desc">Started with HTML, CSS, JavaScript &amp; Python.</p>
+      </div>
+      <div class="timeline-item" data-aos="fade-right" data-aos-duration="600" data-aos-delay="200">
+        <span class="timeline-date">2024 &mdash; 2025</span>
+        <p class="timeline-title">Science (Physical Group)</p>
+        <p class="timeline-desc">Reliance International Academy — Plus Two.</p>
+      </div>
+      <div class="timeline-item" data-aos="fade-left" data-aos-duration="600" data-aos-delay="300">
+        <span class="timeline-date">2023</span>
+        <p class="timeline-title">Secondary Education (10th Pass)</p>
+        <p class="timeline-desc">Shree Makpa Secondary School — 3.60 GPA.</p>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ==================== SKILLS (3D SPHERE) ==================== -->
+  <section id="skills" class="py-24 px-5">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="section-title">My <span>Skills</span></h2>
+      <p class="section-subtitle">25+ technologies &mdash; drag the sphere to explore 360&deg;</p>
+
+      <div class="sphere-wrap">
+        <div class="sphere" id="skillSphere">
+          <div class="sphere-inner" id="sphereInner"></div>
+        </div>
+      </div>
+
+      <!-- Infinite chain skill cards -->
+      <div class="mt-12">
+        <p class="text-xs tracking-widest uppercase text-gray-500 text-center mb-4">Technologies I work with</p>
+        <div class="overflow-hidden px-2" id="skillCardsRow">
+          <div class="flex gap-3 skill-track" id="skillTrack"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SERVICES ==================== -->
+  <section id="services" class="py-24 px-5" style="background:#0e0e20;">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="section-title">What I <span>Offer</span></h2>
+      <p class="section-subtitle">Services I provide to bring ideas to life</p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="service-card" data-aos="fade-up" data-aos-duration="600">
+          <div class="service-icon"><i class="fa-solid fa-globe" style="color:#00d4ff;"></i></div>
+          <h4 class="text-lg font-semibold mb-2">Web Development</h4>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Responsive, fast websites built with React, Tailwind CSS, and Node.js.
+            From landing pages to full-stack applications.
+          </p>
+        </div>
+        <div class="service-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
+          <div class="service-icon"><i class="fa-solid fa-palette" style="color:#00d4ff;"></i></div>
+          <h4 class="text-lg font-semibold mb-2">UI/UX Design</h4>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            User-centered interfaces designed in Figma with focus on usability,
+            aesthetics, and seamless interactions.
+          </p>
+        </div>
+        <div class="service-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+          <div class="service-icon"><i class="fa-solid fa-chart-bar" style="color:#00d4ff;"></i></div>
+          <h4 class="text-lg font-semibold mb-2">Data Analysis</h4>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Python-powered analysis, visualization, and insights using Pandas,
+            Matplotlib, and real-world datasets.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROJECTS ==================== -->
+  <section id="projects" class="py-24 px-5">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="section-title">Featured <span>Projects</span></h2>
+      <p class="section-subtitle">Real-world applications built from the ground up</p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="project-card" data-aos="fade-up" data-aos-duration="600">
+          <div class="project-icon-wrap"><i class="fa-solid fa-cart-shopping" style="color:#00d4ff;"></i></div>
+          <h4 class="text-lg font-semibold mb-2">GaunleMart</h4>
+          <p class="text-gray-400 text-sm leading-relaxed flex-1">
+            E-commerce platform with product listings, cart, and secure checkout. Built for local marketplace needs.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="project-tech"><i class="devicon-react-plain"></i> React</span>
+            <span class="project-tech"><i class="devicon-nodejs-plain"></i> Node.js</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
+          <div class="project-icon-wrap"><i class="fa-solid fa-store" style="color:#00d4ff;"></i></div>
+          <h4 class="text-lg font-semibold mb-2">Ecommerce-store</h4>
+          <p class="text-gray-400 text-sm leading-relaxed flex-1">
+            Scalable online store with dynamic product management, payment integration, and responsive design.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="project-tech"><i class="devicon-react-plain"></i> React</span>
+            <span class="project-tech"><i class="devicon-supabase-plain"></i> Supabase</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+          <div class="project-icon-wrap"><i class="fa-solid fa-bag-shopping" style="color:#00d4ff;"></i></div>
+          <h4 class="text-lg font-semibold mb-2">Rasilo-Suntala</h4>
+          <p class="text-gray-400 text-sm leading-relaxed flex-1">
+            E-commerce website with modern UI, product filtering, cart functionality, and seamless user experience.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="project-tech"><i class="devicon-react-plain"></i> React</span>
+            <span class="project-tech"><i class="devicon-nodejs-plain"></i> Node.js</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+          <div class="project-icon-wrap"><i class="fa-solid fa-school" style="color:#00d4ff;"></i></div>
+          <h4 class="text-lg font-semibold mb-2">MakpaSchool</h4>
+          <p class="text-gray-400 text-sm leading-relaxed flex-1">
+            School management system handling student records, attendance tracking, grading, and staff administration.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="project-tech"><i class="devicon-react-plain"></i> React</span>
+            <span class="project-tech"><i class="devicon-nodejs-plain"></i> Node.js</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="400">
+          <div class="project-icon-wrap"><i class="fa-solid fa-building-columns" style="color:#00d4ff;"></i></div>
+          <h4 class="text-lg font-semibold mb-2">Bankmgmt System</h4>
+          <p class="text-gray-400 text-sm leading-relaxed flex-1">
+            Secure banking platform with account management, transactions, and user authentication.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="project-tech"><i class="devicon-python-plain"></i> Python</span>
+            <span class="project-tech"><i class="devicon-mysql-plain"></i> SQL</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="500">
+          <div class="project-icon-wrap"><i class="fa-solid fa-pen" style="color:#00d4ff;"></i></div>
+          <h4 class="text-lg font-semibold mb-2">KismatNoteX-App</h4>
+          <p class="text-gray-400 text-sm leading-relaxed flex-1">
+            Note-taking application with create, edit, delete, and search functionality. Clean and intuitive interface.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="project-tech"><i class="devicon-react-plain"></i> React</span>
+            <span class="project-tech"><i class="devicon-javascript-plain"></i> JavaScript</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="600">
+          <div class="project-icon-wrap"><i class="fa-solid fa-chart-line" style="color:#00d4ff;"></i></div>
+          <h4 class="text-lg font-semibold mb-2">BMW Sales Analysis</h4>
+          <p class="text-gray-400 text-sm leading-relaxed flex-1">
+            Data-driven analysis of 15,000+ BMW sales records with visualizations, trends, and predictive insights.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="project-tech"><i class="devicon-python-plain"></i> Python</span>
+            <span class="project-tech"><i class="devicon-pandas-plain"></i> Pandas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIALS ==================== -->
+  <section class="py-24 px-5" style="background:#0e0e20;">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="section-title">What People <span>Say</span></h2>
+      <p class="section-subtitle">Feedback from peers and collaborators</p>
+
+      <div class="relative overflow-hidden">
+        <div class="testim-track" id="testimTrack">
+          <div class="testim-slide">
+            <div class="testimonial-card text-center max-w-xl mx-auto">
+              <div class="text-4xl mb-3 text-gray-600" style="font-family:Georgia,serif;">&ldquo;</div>
+              <p class="text-gray-300 italic leading-relaxed mb-4">
+                Kismat blends technical skill with creative vision.
+                His attention to detail sets him apart.
+              </p>
+              <p class="text-sm font-semibold neon-text">&mdash; Peer Developer</p>
+            </div>
+          </div>
+          <div class="testim-slide">
+            <div class="testimonial-card text-center max-w-xl mx-auto">
+              <div class="text-4xl mb-3 text-gray-600" style="font-family:Georgia,serif;">&ldquo;</div>
+              <p class="text-gray-300 italic leading-relaxed mb-4">
+                He turned complex datasets into clear, actionable insights.
+                A talented developer with a sharp mind.
+              </p>
+              <p class="text-sm font-semibold neon-text">&mdash; Project Collaborator</p>
+            </div>
+          </div>
+          <div class="testim-slide">
+            <div class="testimonial-card text-center max-w-xl mx-auto">
+              <div class="text-4xl mb-3 text-gray-600" style="font-family:Georgia,serif;">&ldquo;</div>
+              <p class="text-gray-300 italic leading-relaxed mb-4">
+                His UI/UX designs are intuitive and beautiful.
+                He understands how users think.
+              </p>
+              <p class="text-sm font-semibold neon-text">&mdash; Design Team Member</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center gap-3 mt-6">
+          <button id="testimPrev" class="px-4 py-2 rounded-full text-xs border border-gray-700 text-gray-400 hover:border-[#00d4ff] hover:text-[#00d4ff] transition-all">Prev</button>
+          <button id="testimNext" class="px-4 py-2 rounded-full text-xs border border-gray-700 text-gray-400 hover:border-[#00d4ff] hover:text-[#00d4ff] transition-all">Next</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CERTIFICATES ==================== -->
+  <section id="certificates" class="py-24 px-5">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="section-title">My <span>Certificates</span></h2>
+      <p class="section-subtitle">Credentials that validate the journey</p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-3xl mx-auto" id="certGrid">
+        <!-- Card 1 -->
+        <div class="cert-card-new" data-cert="0" data-aos="fade-up" data-aos-duration="600">
+          <div class="cert-img-wrap">
+            <img src="assets/images/im.jpeg" alt="Hackathon Certificate" loading="lazy" />
+          </div>
+          <div class="cert-body">
+            <h4 class="cert-title">Hackathon Program Participation</h4>
+            <p class="cert-meta"><i class="fa-solid fa-building" style="color:#00d4ff;width:16px;"></i> Reliance Int'l Academy</p>
+            <p class="cert-meta"><i class="fa-solid fa-calendar" style="color:#00d4ff;width:16px;"></i> 2026 (Magh, BS 2082)</p>
+            <button class="cert-btn">View Certificate Details</button>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="cert-card-new" data-cert="1" data-aos="fade-up" data-aos-duration="600" data-aos-delay="150">
+          <div class="cert-img-wrap">
+            <img src="assets/images/im2.jpeg" alt="Fullstack Workshop Certificate" loading="lazy" />
+          </div>
+          <div class="cert-body">
+            <h4 class="cert-title">Fullstack Development Workshop</h4>
+            <p class="cert-meta"><i class="fa-solid fa-building" style="color:#00d4ff;width:16px;"></i> Sunway College &amp; Consultify</p>
+            <p class="cert-meta"><i class="fa-solid fa-calendar" style="color:#00d4ff;width:16px;"></i> 2026 (Jestha, BS 2083)</p>
+            <button class="cert-btn">View Certificate Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CERTIFICATE MODAL ==================== -->
+  <div id="certModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center"
+       style="background:rgba(0,0,0,0.85); backdrop-filter:blur(6px);">
+    <div class="relative max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto rounded-2xl p-6 md:p-8"
+         style="background:#0e0e20; border:1px solid rgba(0,212,255,0.15);">
+      <button id="modalClose" class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition"
+              style="background:rgba(255,255,255,0.06);">&times;</button>
+      <div class="grid md:grid-cols-2 gap-6 items-start">
+        <div class="rounded-xl overflow-hidden" style="border:1px solid rgba(0,212,255,0.1);">
+          <img id="modalImg" src="" alt="Certificate" class="w-full h-auto object-contain" />
+        </div>
+        <div>
+          <h3 id="modalTitle" class="text-2xl font-semibold mb-3"></h3>
+          <p id="modalOrg" class="text-sm text-gray-400 mb-2"><span class="neon-text">Organization:</span> </p>
+          <p id="modalDate" class="text-sm text-gray-400 mb-4"><span class="neon-text">Date:</span> </p>
+          <p id="modalDesc" class="text-gray-300 leading-relaxed text-sm"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section id="contact" class="py-24 px-5" style="background:#0e0e20;">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="section-title">Get In <span>Touch</span></h2>
+      <p class="section-subtitle">Have a project or idea? Let's talk.</p>
+
+      <div class="grid md:grid-cols-5 gap-10">
+        <form id="contactForm" class="md:col-span-3 space-y-5">
+          <input type="hidden" name="_subject" value="New Portfolio Message from KismatDahal.dev" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="name" placeholder="Your Name" required class="input-field" />
+          <input type="text" name="contact" placeholder="Your Contact Number" class="input-field" />
+          <input type="email" name="email" placeholder="Your Email" required class="input-field" />
+          <textarea name="message" rows="5" placeholder="Your Message" required class="input-field resize-none"></textarea>
+          <div id="formSuccess" class="text-sm text-green-400 hidden">Message sent successfully! I'll get back to you soon.</div>
+          <button type="submit" id="formSubmitBtn" class="neon-btn px-8 py-3 rounded-full font-semibold text-sm tracking-wider uppercase w-full md:w-auto">
+            Send Message
+          </button>
+        </form>
+
+        <div class="md:col-span-2 flex flex-col justify-between">
+          <div class="space-y-5">
+            <div>
+              <p class="text-xs tracking-widest uppercase text-gray-500 mb-1">Email</p>
+              <a href="mailto:kismatdahal1@gmail.com" class="text-gray-300 hover:text-[#00d4ff] transition" style="word-break:break-all;">kismatdahal1@gmail.com</a>
+            </div>
+            <div>
+              <p class="text-xs tracking-widest uppercase text-gray-500 mb-1">Phone</p>
+              <a href="tel:+9779764250274" class="text-gray-300 hover:text-[#00d4ff] transition">9764250274</a>
+            </div>
+            <div>
+              <p class="text-xs tracking-widest uppercase text-gray-500 mb-1">Location</p>
+              <p class="text-gray-300">Kathmandu, Nepal</p>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <p class="text-xs tracking-widest uppercase text-gray-500 mb-4">Connect With Me</p>
+            <div class="flex gap-4">
+              <a href="https://github.com/kismatdahal1-afk" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub">
+                <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+              <a href="https://www.facebook.com/kismat.dahal.642239" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
+                <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+              <a href="https://www.instagram.com/kisma_tt01/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+                <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="py-8 px-5 text-center text-sm text-gray-600 border-t border-gray-800" style="background:#0b0b1a;">
+    <p>&copy; 2025 Kismat Dahal. Crafted with <span class="neon-text">passion</span> in Kathmandu, Nepal.</p>
+  </footer>
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Main JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html>
