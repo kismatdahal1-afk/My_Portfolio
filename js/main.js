@@ -249,46 +249,74 @@
         if (r.top < window.innerHeight && r.bottom > 0) { startChain(); }
       }
     });
-    // ── Manual drag for skill track ──
-    var trackStartX = 0, trackStartOffset = 0;
+    // ── Manual drag with momentum for skill track ──
+    var trackStartX = 0, trackStartOffset = 0, trackPrevX = 0, trackPrevTime = 0;
+    var trackVelocity = 0, trackMomentumId = null;
+    function trackMomentumLoop() {
+      if (Math.abs(trackVelocity) < 0.1) { trackVelocity = 0; startChain(); return; }
+      offset -= trackVelocity;
+      trackVelocity *= 0.96;
+      var setW = skillTrack.scrollWidth / 3;
+      if (Math.abs(offset) >= setW) { offset += setW; }
+      skillTrack.style.transform = 'translateX(' + offset + 'px)';
+      trackMomentumId = requestAnimationFrame(trackMomentumLoop);
+    }
+    function stopTrackMomentum() {
+      if (trackMomentumId) { cancelAnimationFrame(trackMomentumId); trackMomentumId = null; }
+    }
+    function trackDragMove(clientX) {
+      var dx = clientX - trackStartX;
+      offset = trackStartOffset - dx;
+      var setW = skillTrack.scrollWidth / 3;
+      if (Math.abs(offset) >= setW) { offset += setW; }
+      skillTrack.style.transform = 'translateX(' + offset + 'px)';
+    }
     skillTrack.addEventListener('mousedown', function(e) {
+      stopTrackMomentum();
       stopChain();
-      trackStartX = e.clientX;
+      trackPrevX = trackStartX = e.clientX;
+      trackPrevTime = Date.now();
       trackStartOffset = offset;
       skillTrack.style.cursor = 'grabbing';
     });
     document.addEventListener('mousemove', function(e) {
       if (!skillTrack.style.cursor || skillTrack.style.cursor !== 'grabbing') return;
-      var dx = e.clientX - trackStartX;
-      offset = trackStartOffset - dx;
-      var setW = skillTrack.scrollWidth / 3;
-      if (Math.abs(offset) >= setW) { offset += setW; }
-      skillTrack.style.transform = 'translateX(' + offset + 'px)';
+      var now = Date.now();
+      trackVelocity = (e.clientX - trackPrevX) / (now - trackPrevTime) * 8;
+      trackPrevX = e.clientX;
+      trackPrevTime = now;
+      trackDragMove(e.clientX);
     });
     document.addEventListener('mouseup', function() {
       if (skillTrack.style.cursor === 'grabbing') {
         skillTrack.style.cursor = '';
-        if (skillsSection) {
+        if (Math.abs(trackVelocity) > 0.5) {
+          trackMomentumLoop();
+        } else if (skillsSection) {
           var r = skillsSection.getBoundingClientRect();
           if (r.top < window.innerHeight && r.bottom > 0) { startChain(); }
         }
       }
     });
     skillTrack.addEventListener('touchstart', function(e) {
+      stopTrackMomentum();
       stopChain();
-      trackStartX = e.touches[0].clientX;
+      trackPrevX = trackStartX = e.touches[0].clientX;
+      trackPrevTime = Date.now();
       trackStartOffset = offset;
     }, { passive: true });
     skillTrack.addEventListener('touchmove', function(e) {
       e.preventDefault();
-      var dx = e.touches[0].clientX - trackStartX;
-      offset = trackStartOffset - dx;
-      var setW = skillTrack.scrollWidth / 3;
-      if (Math.abs(offset) >= setW) { offset += setW; }
-      skillTrack.style.transform = 'translateX(' + offset + 'px)';
+      var now = Date.now();
+      trackVelocity = (e.touches[0].clientX - trackPrevX) / (now - trackPrevTime) * 8;
+      trackPrevX = e.touches[0].clientX;
+      trackPrevTime = now;
+      trackDragMove(e.touches[0].clientX);
     }, { passive: false });
     skillTrack.addEventListener('touchend', function() {
-      if (skillsSection) {
+      if (Math.abs(trackVelocity) > 0.5) {
+        trackMomentumLoop();
+      } else if (skillsSection) {
         var r = skillsSection.getBoundingClientRect();
         if (r.top < window.innerHeight && r.bottom > 0) { startChain(); }
       }
@@ -394,8 +422,8 @@
     var t = e.touches[0];
     var dx = t.clientX - prevX;
     var dy = t.clientY - prevY;
-    rotY += dx * 0.8;
-    rotX += dy * 0.6;
+    rotY += dx * 1.6;
+    rotX += dy * 1.2;
     if (rotX > 30) rotX = 30;
     if (rotX < -30) rotX = -30;
     prevX = t.clientX;
