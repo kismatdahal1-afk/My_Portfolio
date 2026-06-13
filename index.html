@@ -37,9 +37,9 @@
 
   <!-- ==================== NAVBAR ==================== -->
   <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300" style="background:transparent;">
-    <div class="w-full px-8 md:px-16 lg:px-24 py-3 grid grid-cols-3 items-center">
-      <a href="#home" class="neon-text" style="font-size:1.5625rem; font-weight:700; letter-spacing:0.05em; justify-self:start;">KD<span style="color:#e0e0e0;">.</span></a>
-      <ul class="hidden md:flex items-center justify-center gap-8">
+    <div class="navbar-inner">
+      <a href="#home" class="neon-text navbar-logo" style="font-size:1.5625rem; font-weight:700; letter-spacing:0.05em;">KD<span style="color:#e0e0e0;">.</span></a>
+      <ul class="navbar-links">
         <li><a href="#home" class="nav-link text-sm">Home</a></li>
         <li><a href="#about" class="nav-link text-sm">About</a></li>
         <li><a href="#skills" class="nav-link text-sm">Skills</a></li>
@@ -48,9 +48,8 @@
         <li><a href="#certificates" class="nav-link text-sm">Certificates</a></li>
         <li><a href="#contact" class="nav-link text-sm">Contact</a></li>
       </ul>
-      <div class="flex items-center gap-3 justify-self-end">
-        <button id="themeToggle" class="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300"
-                style="background:rgba(255,255,255,0.06); border:1px solid rgba(0,212,255,0.2);"
+      <div class="navbar-actions">
+        <button id="themeToggle" class="theme-btn"
                 aria-label="Toggle theme">
           <svg id="sunIcon" class="w-4 h-4 hidden" fill="none" stroke="#00d4ff" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -59,14 +58,14 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
           </svg>
         </button>
-        <button id="menuToggle" class="md:hidden text-white focus:outline-none">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+        <button id="menuToggle" class="hamburger-btn" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </div>
     </div>
-    <div id="mobileMenu" class="md:hidden hidden flex-col items-center gap-4 pb-4" style="background:rgba(11,11,26,0.95);">
+    <div id="mobileMenu" class="mobile-menu">
       <a href="#home" class="nav-link text-sm">Home</a>
       <a href="#about" class="nav-link text-sm">About</a>
       <a href="#skills" class="nav-link text-sm">Skills</a>
