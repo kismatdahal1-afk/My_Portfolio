@@ -249,6 +249,50 @@
         if (r.top < window.innerHeight && r.bottom > 0) { startChain(); }
       }
     });
+    // ── Manual drag for skill track ──
+    var trackStartX = 0, trackStartOffset = 0;
+    skillTrack.addEventListener('mousedown', function(e) {
+      stopChain();
+      trackStartX = e.clientX;
+      trackStartOffset = offset;
+      skillTrack.style.cursor = 'grabbing';
+    });
+    document.addEventListener('mousemove', function(e) {
+      if (!skillTrack.style.cursor || skillTrack.style.cursor !== 'grabbing') return;
+      var dx = e.clientX - trackStartX;
+      offset = trackStartOffset - dx;
+      var setW = skillTrack.scrollWidth / 3;
+      if (Math.abs(offset) >= setW) { offset += setW; }
+      skillTrack.style.transform = 'translateX(' + offset + 'px)';
+    });
+    document.addEventListener('mouseup', function() {
+      if (skillTrack.style.cursor === 'grabbing') {
+        skillTrack.style.cursor = '';
+        if (skillsSection) {
+          var r = skillsSection.getBoundingClientRect();
+          if (r.top < window.innerHeight && r.bottom > 0) { startChain(); }
+        }
+      }
+    });
+    skillTrack.addEventListener('touchstart', function(e) {
+      stopChain();
+      trackStartX = e.touches[0].clientX;
+      trackStartOffset = offset;
+    }, { passive: true });
+    skillTrack.addEventListener('touchmove', function(e) {
+      e.preventDefault();
+      var dx = e.touches[0].clientX - trackStartX;
+      offset = trackStartOffset - dx;
+      var setW = skillTrack.scrollWidth / 3;
+      if (Math.abs(offset) >= setW) { offset += setW; }
+      skillTrack.style.transform = 'translateX(' + offset + 'px)';
+    }, { passive: false });
+    skillTrack.addEventListener('touchend', function() {
+      if (skillsSection) {
+        var r = skillsSection.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) { startChain(); }
+      }
+    });
   }
 
   var sphereEl = document.getElementById('skillSphere');
