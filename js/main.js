@@ -218,10 +218,15 @@
     var offset = 0;
     var speed = 0.5;
     var isPlaying = false;
+    function wrapOffset() {
+      var setW = skillTrack.scrollWidth / 3;
+      if (setW <= 0) return;
+      if (offset > 0) offset -= setW;
+      if (offset < -setW) offset += setW;
+    }
     function chainLoop() {
       offset -= speed;
-      var setW = skillTrack.scrollWidth / 3;
-      if (Math.abs(offset) >= setW) { offset += setW; }
+      wrapOffset();
       skillTrack.style.transform = 'translateX(' + offset + 'px)';
       animId = requestAnimationFrame(chainLoop);
     }
@@ -256,8 +261,7 @@
       if (Math.abs(trackVelocity) < 0.1) { trackVelocity = 0; startChain(); return; }
       offset += trackVelocity;
       trackVelocity *= 0.96;
-      var setW = skillTrack.scrollWidth / 3;
-      if (Math.abs(offset) >= setW) { offset -= Math.sign(offset) * setW; }
+      wrapOffset();
       skillTrack.style.transform = 'translateX(' + offset + 'px)';
       trackMomentumId = requestAnimationFrame(trackMomentumLoop);
     }
@@ -267,8 +271,7 @@
     function trackDragMove(clientX) {
       var dx = clientX - trackStartX;
       offset = trackStartOffset + dx;
-      var setW = skillTrack.scrollWidth / 3;
-      if (Math.abs(offset) >= setW) { offset -= Math.sign(offset) * setW; }
+      wrapOffset();
       skillTrack.style.transform = 'translateX(' + offset + 'px)';
     }
     skillTrack.addEventListener('mousedown', function(e) {
