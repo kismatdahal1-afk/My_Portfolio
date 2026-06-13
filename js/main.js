@@ -68,18 +68,32 @@
     });
   }
 
-  // ── Contact form (sends email via FormSubmit.co) ──
+  // ── Contact form (sends email via EmailJS with HTML template) ──
   var form = document.getElementById('contactForm');
   var formSuccess = document.getElementById('formSuccess');
   var formBtn = document.getElementById('formSubmitBtn');
+
+  // ⚠️ TODO: Replace these with your EmailJS credentials (see setup instructions)
+  var EMAILJS_PUBLIC_KEY  = 'ttxv4j6PVgxP46OnW';
+  var EMAILJS_SERVICE_ID  = 'service_oyve6et';
+  var EMAILJS_TEMPLATE_ID = 'template_b6cukic';
+
   if (form && formSuccess && formBtn) {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       formBtn.disabled = true;
       formBtn.textContent = 'Sending...';
-      var data = new FormData(form);
-      data.append('_next', '');
-      fetch('https://formsubmit.co/kismatdahal1@gmail.com', { method: 'POST', body: data })
+
+      var templateParams = {
+        name:    form.querySelector('[name="name"]').value.trim(),
+        contact: form.querySelector('[name="contact"]').value.trim(),
+        email:   form.querySelector('[name="email"]').value.trim(),
+        message: form.querySelector('[name="message"]').value.trim()
+      };
+
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
         .then(function() {
           formSuccess.classList.remove('hidden');
           form.reset();
@@ -87,7 +101,7 @@
           formBtn.disabled = false;
         })
         .catch(function() {
-          alert('Something went wrong. Please try again or email me directly.');
+          alert('Something went wrong. Please try again or email me directly at kismatdahal1@gmail.com.');
           formBtn.textContent = 'Send Message';
           formBtn.disabled = false;
         });
