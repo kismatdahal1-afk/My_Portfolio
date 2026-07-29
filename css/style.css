@@ -622,6 +622,16 @@ img, video {
 #certModal > div { animation: slideUp 0.3s ease; }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes slideUp { from { transform:translateY(30px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+}
+#authModal { animation: fadeIn 0.25s ease; }
+#authModal > div { animation: slideUp 0.3s ease; }
+#authModal .shake { animation: shake 0.4s ease; }
 
 /* ===== FORM ===== */
 .input-field {
@@ -810,6 +820,7 @@ img, video {
 .light-theme #contact,
 .light-theme #certModal,
 .light-theme #certModal > div,
+.light-theme #authModal > div,
 .light-theme section[style*="background:#0e0e20"] {
   background: #ffffff !important;
 }
@@ -917,7 +928,8 @@ img, video {
   opacity: 1;
   transform: rotate(90deg) scale(1.1);
 }
-.light-theme #certModal > div {
+.light-theme #certModal > div,
+.light-theme #authModal > div {
   border-color: #e2e8f0 !important;
 }
 .light-theme #certModal .rounded-xl {

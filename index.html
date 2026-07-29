@@ -512,6 +512,38 @@
     </div>
   </div>
 
+  <!-- ==================== AUTH MODAL ==================== -->
+  <div id="authModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center"
+       style="background:rgba(0,0,0,0.85); backdrop-filter:blur(6px);">
+    <div class="relative max-w-md w-full mx-4 rounded-2xl p-8 text-center"
+         style="background:#0e0e20; border:1px solid rgba(0,212,255,0.15);">
+      <button id="authModalClose" aria-label="Close" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-none border-none cursor-pointer text-red-400 opacity-70 hover:opacity-100 hover:rotate-90 transition-all">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 8 Q16 18, 24 24" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <path d="M24 8 Q16 14, 8 24" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        </svg>
+      </button>
+      <div class="mb-6">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center text-2xl"
+             style="background:rgba(0,212,255,0.08); border:1px solid rgba(0,212,255,0.15); color:#00d4ff;">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-3">Behind the Code</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          Behind every line of code lies a world of intention. Enter the secret code to see what's beyond.
+        </p>
+      </div>
+      <div class="space-y-4">
+        <input type="password" id="authPassword" placeholder="Enter secret code" class="input-field text-center"
+               autocomplete="off" />
+        <p id="authError" class="text-sm text-red-400 hidden">Incorrect code, try again.</p>
+        <button id="authSubmitBtn" class="neon-btn px-8 py-3 rounded-full font-semibold text-sm tracking-wider uppercase w-full">
+          Unlock Project
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ==================== CONTACT ==================== -->
   <section id="contact" class="py-24 px-5" style="background:#0e0e20;">
     <div class="max-w-4xl mx-auto">

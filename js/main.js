@@ -568,6 +568,76 @@
     });
   }
 
+  // ── Password Auth for project cards ──
+  var authModal = document.getElementById('authModal');
+  var authPassword = document.getElementById('authPassword');
+  var authError = document.getElementById('authError');
+  var authSubmitBtn = document.getElementById('authSubmitBtn');
+  var authModalClose = document.getElementById('authModalClose');
+  var pendingUrl = '';
+
+  document.querySelectorAll('a.project-card').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      pendingUrl = this.getAttribute('href');
+      authPassword.value = '';
+      authError.classList.add('hidden');
+      authPassword.classList.remove('shake');
+      authPassword.style.borderColor = '';
+      authModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      setTimeout(function() { authPassword.focus(); }, 100);
+    });
+  });
+
+  function closeAuthModal() {
+    authModal.classList.add('hidden');
+    document.body.style.overflow = '';
+    pendingUrl = '';
+  }
+
+  function checkPassword() {
+    if (authPassword.value === 'beyond.the.code') {
+      if (pendingUrl) {
+        window.open(pendingUrl, '_blank');
+      }
+      closeAuthModal();
+    } else {
+      authError.classList.remove('hidden');
+      authPassword.classList.add('shake');
+      authPassword.style.borderColor = '#ef4444';
+      authPassword.value = '';
+      setTimeout(function() {
+        authPassword.classList.remove('shake');
+        authPassword.focus();
+      }, 400);
+    }
+  }
+
+  if (authSubmitBtn) {
+    authSubmitBtn.addEventListener('click', checkPassword);
+  }
+
+  if (authPassword) {
+    authPassword.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { checkPassword(); }
+    });
+  }
+
+  if (authModalClose) { authModalClose.addEventListener('click', closeAuthModal); }
+
+  if (authModal) {
+    authModal.addEventListener('click', function(e) {
+      if (e.target === authModal) { closeAuthModal(); }
+    });
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && authModal && !authModal.classList.contains('hidden')) {
+      closeAuthModal();
+    }
+  });
+
   // ── AOS (Animate On Scroll) initialization ──
   if (typeof AOS !== 'undefined') {
     AOS.init({
