@@ -632,8 +632,8 @@
     togglePassword.addEventListener('click', function() {
       var isPassword = authPassword.type === 'password';
       authPassword.type = isPassword ? 'text' : 'password';
-      eyeIcon.classList.toggle('fa-eye', !isPassword);
-      eyeIcon.classList.toggle('fa-eye-slash', isPassword);
+      eyeIcon.classList.toggle('fa-eye', isPassword);
+      eyeIcon.classList.toggle('fa-eye-slash', !isPassword);
     });
   }
 
