@@ -528,14 +528,19 @@
              style="background:rgba(0,212,255,0.08); border:1px solid rgba(0,212,255,0.15); color:#00d4ff;">
           <i class="fa-solid fa-lock"></i>
         </div>
-        <h3 class="text-xl font-semibold mb-3">Behind the Code</h3>
+        <h3 class="text-xl font-semibold mb-3">Access Required</h3>
         <p class="text-gray-400 text-sm leading-relaxed">
           Behind every line of code lies a world of intention. Enter the secret code to see what's beyond.
         </p>
       </div>
       <div class="space-y-4">
-        <input type="password" id="authPassword" placeholder="Enter secret code" class="input-field text-center"
-               autocomplete="off" />
+        <div class="relative">
+          <input type="password" id="authPassword" placeholder="Enter secret code" class="input-field text-center w-full pr-12"
+                 autocomplete="off" />
+          <button type="button" id="togglePassword" class="absolute right-3 top-1/2 -translate-y-1/2 bg-none border-none cursor-pointer p-1" style="color:#00d4ff;" aria-label="Toggle password visibility">
+            <i class="fa-solid fa-eye" id="eyeIcon"></i>
+          </button>
+        </div>
         <p id="authError" class="text-sm text-red-400 hidden">Incorrect code, try again.</p>
         <button id="authSubmitBtn" class="neon-btn px-8 py-3 rounded-full font-semibold text-sm tracking-wider uppercase w-full">
           Unlock Project

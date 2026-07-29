@@ -597,7 +597,7 @@
   }
 
   function checkPassword() {
-    if (authPassword.value === 'beyond.the.code') {
+    if (authPassword.value === 'beyondthecode') {
       if (pendingUrl) {
         window.open(pendingUrl, '_blank');
       }
@@ -625,6 +625,17 @@
   }
 
   if (authModalClose) { authModalClose.addEventListener('click', closeAuthModal); }
+
+  var togglePassword = document.getElementById('togglePassword');
+  var eyeIcon = document.getElementById('eyeIcon');
+  if (togglePassword && authPassword) {
+    togglePassword.addEventListener('click', function() {
+      var isPassword = authPassword.type === 'password';
+      authPassword.type = isPassword ? 'text' : 'password';
+      eyeIcon.classList.toggle('fa-eye', !isPassword);
+      eyeIcon.classList.toggle('fa-eye-slash', isPassword);
+    });
+  }
 
   if (authModal) {
     authModal.addEventListener('click', function(e) {
