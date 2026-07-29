@@ -163,14 +163,16 @@
       counted = true;
       statNumbers.forEach(function(el) {
         var target = parseInt(el.getAttribute('data-count'));
+        var suffix = el.getAttribute('data-suffix') || '';
         var current = 0;
         var step = Math.max(1, Math.floor(target / 60));
         var interval = setInterval(function() {
           current += step;
           if (current >= target) { current = target; clearInterval(interval); }
-          el.textContent = current >= 1000
+          var display = current >= 1000
             ? (current / 1000).toFixed(1).replace(/\.0$/, '') + 'K'
             : current;
+          el.textContent = display + suffix;
         }, 25);
       });
     }
