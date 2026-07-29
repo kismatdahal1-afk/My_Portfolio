@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doppler Effect</title>
+<style>
+html,body{
+  margin:0; height:100%;
+  font-family:"Segoe UI",system-ui;
+  display:flex; justify-content:center; align-items:center;
+  background:linear-gradient(135deg,#cce7ff,#e0f7fa);
+  backdrop-filter:blur(10px);
+}
+
+/* ===== Animated Rainbow Border ===== */
+.wrapper{
+  padding:18px;
+  border-radius:22px;
+  background:linear-gradient(
+    90deg,red,orange,yellow,pink,violet,indigo,blue,red
+  );
+  background-size:500% 500%;
+  animation:borderMove 8s linear infinite;
+}
+
+@keyframes borderMove{
+  0%{background-position:0% 50%;}
+  100%{background-position:100% 50%;}
+}
+
+.container{
+  background:#fff;
+  padding:16px;
+  border-radius:18px;
+  text-align:center;
+  max-width:900px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.15);
+}
+
+/* ===== Heading ===== */
+h1{
+  margin:10px 0;
+  font-size:38px;
+  font-weight:900;
+  letter-spacing:2px;
+  background:linear-gradient(90deg,#007cff,#00ff99);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+h1 span{
+  display:block;
+  font-size:18px;
+  font-weight:700;
+  margin-top:6px;
+}
+
+/* ===== Case Text ===== */
+#caseText{
+  margin:12px 0 16px 0;
+  font-size:18px;
+  font-weight:700;
+  opacity:0;
+  transform:translateY(-20px);
+  transition:all .6s ease;
+}
+
+#caseText.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ===== Buttons ===== */
+.controls{
+  display:flex;
+  flex-wrap:nowrap; /* single line */
+  justify-content:flex-start;
+  gap:12px;
+  margin-bottom:12px;
+  overflow-x:auto; /* horizontal scroll if overflow */
+  padding-bottom:4px;
+}
+
+.controls::-webkit-scrollbar{
+  height:6px;
+}
+
+.controls::-webkit-scrollbar-thumb{
+  background:rgba(0,0,0,0.2);
+  border-radius:3px;
+}
+
+/* ===== Stylish Buttons ===== */
+button{
+  padding:10px 22px;
+  border:none;
+  border-radius:24px;
+  font-weight:700;
+  color:#fff;
+  cursor:pointer;
+  font-size:16px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.18);
+}
+
+button:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25), 0 0 12px rgba(255,255,255,0.2) inset;
+}
+
+button:active{
+  transform: translateY(1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.case1{background:linear-gradient(135deg,#ff6b6b,#ff8787);}
+.case2{background:linear-gradient(135deg,#f7b731,#ffd56b);}
+.case3{background:linear-gradient(135deg,#4b7bec,#74b9ff);}
+.case4{background:linear-gradient(135deg,#a55eea,#c77dff);}
+.case5{background:linear-gradient(135deg,#20bf6b,#58d68d);}
+.case6{background:linear-gradient(135deg,#eb3b5a,#ff6f7a);}
+.case7{background:linear-gradient(135deg,#3867d6,#4d85ff);}
+.case8{background:linear-gradient(135deg,#00bfff,#00ff99);}
+.case9{background:linear-gradient(135deg,#00ff44,#00cc22);}
+.stop{background:linear-gradient(135deg,#555,#888);}
+
+button::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-75%;
+  width:50%;
+  height:100%;
+  background:rgba(255,255,255,0.25);
+  transform:skewX(-25deg);
+  transition: all 0.6s ease;
+}
+
+button:hover::after{
+  left:125%;
+}
+
+canvas{
+  border:1px solid #ddd;
+  border-radius:12px;
+  background:#fff;
+  margin-top:12px;
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+<div class="container">
+
+<h1>
+  DOPPLER EFFECT DEMONSTRATION
+  <span>Made By KISMAT DAHAL</span>
+</h1>
+
+<div class="controls">
+  <button class="case1" onclick="startCase(1)">Case 1</button>
+  <button class="case2" onclick="startCase(2)">Case 2</button>
+  <button class="case3" onclick="startCase(3)">Case 3</button>
+  <button class="case4" onclick="startCase(4)">Case 4</button>
+  <button class="case5" onclick="startCase(5)">Case 5</button>
+  <button class="case6" onclick="startCase(6)">Case 6</button>
+  <button class="case7" onclick="startCase(7)">Case 7</button>
+  <button class="case8" onclick="startCase(8)">Case 8</button>
+  <button class="case9" onclick="startCase(9)">Case 9</button>
+  <button class="stop" onclick="stopAll()">Stop</button>
+</div>
+
+<div id="caseText"></div>
+
+<canvas id="c" width="860" height="380"></canvas>
+
+</div>
+</div>
+
+<script>
+const PX_PER_CM=20;
+const WAVE_GAP_PX=30;
+const emissionIntervalMs=300;
+const waveSpeed=WAVE_GAP_PX/(emissionIntervalMs/1000);
+
+const canvas=document.getElementById("c");
+const ctx=canvas.getContext("2d");
+const W=canvas.width,H=canvas.height,centerY=H/2;
+
+let waves=[],anim=null,emit=null,lastTS=null;
+let source={x:0,y:centerY,vx:0},observer={x:0,y:centerY,vx:0};
+let currentCase=0;
+
+const caseText=document.getElementById("caseText");
+
+const caseDescriptions={
+  1:"Observer is moving towards stationary source",
+  2:"Observer is moving away from stationary source",
+  3:"Source is moving towards stationary observer",
+  4:"Source is moving away from stationary observer",
+  5:"Both source and observer moving towards each other",
+  6:"Both source and observer moving away from each other",
+  7:"Observer is followed by source",
+  8:"Source is followed by observer",
+  9:"Shock wave and sonic boom"
+};
+
+const caseColors={
+  1:"#ff6b6b",
+  2:"#f7b731",
+  3:"#4b7bec",
+  4:"#a55eea",
+  5:"#20bf6b",
+  6:"#eb3b5a",
+  7:"#3867d6",
+  8:"#00bfff",
+  9:"#00aa44"
+};
+
+function showCaseText(n){
+  caseText.textContent=caseDescriptions[n];
+  caseText.style.color=caseColors[n];
+  caseText.classList.remove("show");
+  setTimeout(()=>caseText.classList.add("show"),50);
+}
+
+function hideCaseText(){
+  caseText.classList.remove("show");
+}
+
+function setStartPositions(n){
+  const mid=W/2;
+  if([1,3,5].includes(n)){source.x=50;observer.x=W-50;}
+  else if(n===6){source.x=mid-80;observer.x=mid+80;}
+  else if(n===7){source.x=mid-60;observer.x=mid+40;}
+  else if(n===8){source.x=mid+70;observer.x=source.x+7*PX_PER_CM;}
+  else if(n===9){source.x=50; observer.x=W-50;}
+  else{source.x=mid-40;observer.x=mid+40;}
+}
+
+function applyVel(n){
+  const v=80;
+  source.vx=observer.vx=0;
+  if(n===1) observer.vx=-v;
+  if(n===2) observer.vx=v;
+  if(n===3) source.vx=v;
+  if(n===4) source.vx=-v;
+  if(n===5){source.vx=v;observer.vx=-v;}
+  if(n===6){source.vx=-v;observer.vx=v;}
+  if(n===7){source.vx=observer.vx=v;}
+  if(n===8){source.vx=-v;observer.vx=-v;}
+  if(n===9){source.vx=waveSpeed*1.5; observer.vx=0;}
+}
+
+function emitWave(){waves.push({x:source.x,y:source.y,r:0});}
+function startEmitter(){emitWave();emit=setInterval(emitWave,emissionIntervalMs);}
+function stopEmitter(){clearInterval(emit);}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle="#00aa44";
+  ctx.lineWidth = 3;
+  waves.forEach(w=>{ctx.beginPath();ctx.arc(w.x,w.y,w.r,0,Math.PI*2);ctx.stroke();});
+  ctx.fillStyle="red";ctx.beginPath();ctx.arc(source.x,source.y,8,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle="blue";ctx.beginPath();ctx.arc(observer.x,observer.y,8,0,Math.PI*2);ctx.fill();
+  ctx.font="bold 14px Segoe UI";
+  ctx.fillStyle="red";ctx.fillText("Source",source.x-18,source.y-14);
+  ctx.fillStyle="blue";ctx.fillText("Observer",observer.x-26,observer.y-14);
+}
+
+function update(dt){
+  source.x+=source.vx*dt;
+  observer.x+=observer.vx*dt;
+  waves.forEach(w=>w.r+=waveSpeed*dt);
+
+  // ===== Boundary check =====
+  if(source.x<0 || source.x>W || observer.x<0 || observer.x>W){
+    stopEmitter(); // stop wave emission
+    cancelAnimationFrame(anim);
+    waves=[]; // clear waves
+    setStartPositions(currentCase); // reset positions
+    applyVel(currentCase); // restore velocities
+    draw();
+    startEmitter(); // restart emitter
+    anim=requestAnimationFrame(loop); // restart loop
+  }
+}
+
+function loop(ts){
+  if(!lastTS) lastTS=ts;
+  const dt=(ts-lastTS)/1000;lastTS=ts;
+  update(dt);draw();
+  anim=requestAnimationFrame(loop);
+}
+
+function startCase(n){
+  stopAll();
+  currentCase=n;
+  showCaseText(n);
+  setStartPositions(n);
+  applyVel(n);
+  startEmitter();
+  anim=requestAnimationFrame(loop);
+}
+
+function stopAll(){
+  cancelAnimationFrame(anim);
+  stopEmitter();
+  waves=[];
+  hideCaseText();
+  draw();
+}
+
+draw();
+</script>
+</body>
+</html>
